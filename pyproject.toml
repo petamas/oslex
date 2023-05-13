@@ -10,13 +10,14 @@ authors = [
 ]
 description = "OS-independent wrapper for shlex and mslex"
 readme = "README.md"
-requires-python = ">=3.5"
+# mslex is supposed to support >=3.5, but it has an accidental f-string, making it unusable on 3.5
+# see https://github.com/smoofra/mslex/issues/1
+requires-python = ">=3.6"
 dependencies = [
   "mslex",
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.5",
     "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
