@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "oslex"
-version = "0.1.1"
+version = "0.1.2"
 authors = [
 	{ name="Tamás PEREGI", email="petamas@gmail.com" },
 ]
