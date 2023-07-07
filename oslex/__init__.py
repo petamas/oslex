@@ -1,4 +1,5 @@
 import sys
+from typing import List
 
 
 def is_posix() -> bool:
@@ -47,7 +48,7 @@ def quote(s: str) -> str:
     return underlying.quote(s)
 
 
-def split(s: str) -> list[str]:
+def split(s: str) -> List[str]:
     """
     Split the string s using shell-like syntax.
     This function is safe to use both for POSIX-compatible shells and for Windows's cmd.
@@ -55,7 +56,7 @@ def split(s: str) -> list[str]:
     return underlying.split(s)
 
 
-def join(split_command: list[str]) -> str:
+def join(split_command: List[str]) -> str:
     """
     Concatenate the tokens of the list split_command and return a string. This function is the inverse of split().
     The returned value is shell-escaped to protect against injection vulnerabilities (see quote()).
