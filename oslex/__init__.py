@@ -8,7 +8,7 @@ def is_posix() -> bool:
     This is the condition for oslex.underlying being shlex.
     This is also the condition for os.path being posixpath.
     """
-    return 'posix' in sys.builtin_module_names
+    return "posix" in sys.builtin_module_names
 
 
 def is_windows() -> bool:
@@ -23,7 +23,7 @@ def is_windows() -> bool:
         # See https://github.com/python/cpython/blob/3.7/Lib/os.py
         return False
 
-    return 'nt' in sys.builtin_module_names
+    return "nt" in sys.builtin_module_names
 
 
 # Import OS-specific module
@@ -35,7 +35,7 @@ elif is_windows():
     # also, mypy does not understand conditional importing, so it thinks we are redefining the name "underlying" -> we have to ignore the "no-redef" error
     import mslex as underlying  # type: ignore[import, no-redef]
 else:
-    raise ImportError('no os specific module found')
+    raise ImportError("no os specific module found")
 
 # Define functions
 
@@ -66,4 +66,4 @@ def join(split_command: List[str]) -> str:
     # mslex doesn't have it at all
     # It's easier to just implement it without trying to import the functionality
     # Implementation is the same as shlex.join(), see https://github.com/python/cpython/blob/3.8/Lib/shlex.py
-    return ' '.join(quote(arg) for arg in split_command)
+    return " ".join(quote(arg) for arg in split_command)
