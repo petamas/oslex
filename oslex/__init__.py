@@ -40,20 +40,20 @@ else:
 # Define functions
 
 
-def quote(s: str) -> str:
+def quote(s: str, **kwargs) -> str:
     """
     Return a shell-escaped version of the string s. The returned value is a string that can safely be used as one token in a shell command line, for cases where you cannot use a list.
     This function is safe to use both for POSIX-compatible shells and for Windows's cmd.
     """
-    return underlying.quote(s)
+    return underlying.quote(s, **kwargs)
 
 
-def split(s: str) -> List[str]:
+def split(s: str, **kwargs) -> List[str]:
     """
     Split the string s using shell-like syntax.
     This function is safe to use both for POSIX-compatible shells and for Windows's cmd.
     """
-    return underlying.split(s)
+    return underlying.split(s, **kwargs)
 
 
 def join(split_command: List[str]) -> str:
