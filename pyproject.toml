@@ -4,26 +4,26 @@ build-backend = "hatchling.build"
 
 [project]
 name = "oslex"
-version = "0.1.4"
+version = "2.0.0"
 authors = [
-	{ name="Tamás PEREGI", email="petamas@gmail.com" },
+    { name="Tamás PEREGI", email="petamas@gmail.com" },
 ]
 description = "OS-independent wrapper for shlex and mslex"
 readme = "README.md"
-# mslex is supposed to support >=3.5, but it has an accidental f-string, making it unusable on 3.5
-# see https://github.com/smoofra/mslex/issues/1
-requires-python = ">=3.6"
+# Python 3.8 is the oldest version supported by "uv", which is used to verify the library on various Python platforms.
+requires-python = ">=3.8"
 dependencies = [
-  "mslex",
+  "mslex>=1.3.0,<2",
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "License :: OSI Approved :: MIT License",
     "Operating System :: MacOS",
     "Operating System :: Microsoft :: Windows",
@@ -33,3 +33,44 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/petamas/oslex"
 "Bug Tracker" = "https://github.com/petamas/oslex/issues"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.14.1,<1.15",
+    "pytest>=8.3.5,<9",
+    "ruff>=0.15.12,<0.16",
+    "ty>=0.0.34,<0.1",
+]
+
+
+[tool.mypy]
+strict = true
+
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.ruff.lint]
+# A bit agressive, but good for experimenting
+extend-select = ["ALL"]
+ignore = [
+    # Don't care about pydocstyle
+    "D1",  # pydocstyle
+    "D2",  # pydocstyle
+    "D3",  # pydocstyle
+    "D4",  # pydocstyle
+    # Don't want to split dependencies based on whether they're only needed for type checking or not
+    "TC003",  # typing-only-standard-library-import
+    # Conflicts with formatter
+    "COM812"  # missing-trailing-comma
+]
+flake8-quotes.inline-quotes = "single"
+isort.force-single-line = true
+pylint.max-args = 6  # For split()
+
+[tool.ruff.lint.per-file-ignores]
+# Allow asserts in tests
+"**/tests/**" = ["S101"]  # assert
